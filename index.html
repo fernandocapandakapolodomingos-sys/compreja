@@ -394,14 +394,15 @@ const WHATSAPP = "244945529130";
 
 
     const productsData = [
-      {id:1, name:"Auscultadores Bluetooth", category:"Tecnologia", price:12500, emoji:"🎧", desc:"Som sem fios para música e chamadas."},
-      {id:2, name:"Relógio inteligente", category:"Tecnologia", price:18000, emoji:"⌚", desc:"Um acessório moderno para o dia a dia."},
-      {id:3, name:"Mochila urbana", category:"Moda", price:9500, emoji:"🎒", desc:"Prática para escola, trabalho e passeios."},
-      {id:4, name:"Ténis desportivos", category:"Moda", price:22000, emoji:"👟", desc:"Estilo casual para várias ocasiões."},
-      {id:5, name:"Candeeiro LED", category:"Casa", price:7500, emoji:"💡", desc:"Iluminação para o teu espaço."},
-      {id:6, name:"Garrafa térmica", category:"Casa", price:6000, emoji:"🥤", desc:"Ideal para transportar a tua bebida."},
-      {id:7, name:"Comando para jogos", category:"Tecnologia", price:16000, emoji:"🎮", desc:"Para melhorar a tua experiência de jogo."},
-      {id:8, name:"Perfume", category:"Beleza", price:14000, emoji:"🧴", desc:"Uma opção elegante para oferecer."}
+      {id:1, name:"Auscultadores Bluetooth", category:"Tecnologia", price:12500, stock: 10, emoji:"🎧", desc:"Som sem fios para música e chamadas."},
+      {id:2, name: "Fita LED RGB", category: "Acessórios", price: 8000, stock: 20, emoji: "💡", desc: "Iluminação LED RGB"
+      {id:3, name:"Relógio inteligente", category:"Tecnologia", price:18000,stock: 11, emoji:"⌚", desc:"Um acessório moderno para o dia a dia."},
+      {id:4, name:"Mochila urbana", category:"Moda", price:9500,stock: 5, emoji:"🎒", desc:"Prática para escola, trabalho e passeios."},
+      {id:5, name:"Ténis desportivos", category:"Moda", price:22000,stock: 10, emoji:"👟", desc:"Estilo casual para várias ocasiões."},
+      {id:6, name:"Candeeiro LED", category:"Casa", price:7500, stock: 3,emoji:"💡", desc:"Iluminação para o teu espaço."},
+      {id:7, name:"Garrafa térmica", category:"Casa", price:6000,stock: 3, emoji:"🥤", desc:"Ideal para transportar a tua bebida."},
+      {id:8, name:"Comando para jogos", category:"Tecnologia",stock: 6, price:16000, emoji:"🎮", desc:"Para melhorar a tua experiência de jogo."},
+      {id:9, name:"Perfume", category:"Beleza", price:14000,stock: 15, emoji:"🧴", desc:"Uma opção elegante para oferecer."}
     ];
 
     let cart = [];
@@ -420,6 +421,44 @@ const WHATSAPP = "244945529130";
     function setCategory(category) {
       activeCategory = category;
       renderFilters();
+      
+function orderProductWhatsApp(productId) {
+  const product = productsData.find(
+    p => String(p.id) === String(productId)
+  );
+
+  if (!product) {
+    alert("Não foi possível encontrar este produto.");
+    return;
+  }
+
+  const stockStatus = Number(product.stock) > 0
+    ? "Produto disponível em stock"
+    : "Produto fora de stock — pretendo encomendar";
+
+  const message =
+`Olá, COMPREJÁ! 👋
+
+Quero fazer uma encomenda.
+
+📦 Produto: ${product.name}
+💰 Preço anunciado: ${
+  Number.isFinite(Number(product.price)) && product.price !== null
+    ? Number(product.price).toLocaleString("pt-PT") + " Kz"
+    : "Sob consulta"
+}
+📍 Estado: ${stockStatus}
+
+Por favor, confirmem a disponibilidade, o preço final e o prazo de entrega.`;
+
+  const phone = "244945529130";
+
+  const url =
+    "https://wa.me/" + phone +
+    "?text=" + encodeURIComponent(message);
+
+  window.open(url, "_blank");
+}
       renderProducts();
     }
 
