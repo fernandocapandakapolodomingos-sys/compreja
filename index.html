@@ -558,6 +558,176 @@ const WHATSAPP = "244945529130";
     renderProducts();
     updateCart();
   </script>
+  
+<!-- ENCOMENDAS PERSONALIZADAS COMPREJÁ -->
+<style>
+  .custom-order {
+    max-width: 760px;
+    margin: 35px auto;
+    padding: 24px;
+    border-radius: 18px;
+    background: #f1f6ff;
+    color: #17233b;
+    font-family: Arial, sans-serif;
+  }
+
+  .custom-order h2 {
+    margin-top: 0;
+    color: #1455c0;
+  }
+
+  .custom-order p {
+    line-height: 1.6;
+  }
+
+  .custom-order label {
+    display: block;
+    margin-top: 14px;
+    font-weight: bold;
+  }
+
+  .custom-order input,
+  .custom-order select,
+  .custom-order textarea {
+    box-sizing: border-box;
+    width: 100%;
+    margin-top: 7px;
+    padding: 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 9px;
+    background: white;
+    font: inherit;
+  }
+
+  .custom-order button {
+    width: 100%;
+    margin-top: 20px;
+    padding: 14px;
+    border: 0;
+    border-radius: 10px;
+    background: #1455c0;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .custom-order button:hover {
+    background: #0d3d91;
+  }
+
+  .custom-order .note {
+    font-size: 13px;
+    color: #526078;
+  }
+</style>
+
+<section class="custom-order" id="encomenda-personalizada">
+  <h2>Não encontraste o que procuras?</h2>
+
+  <p>
+    Na COMPREJÁ, podes encomendar produtos que não estão
+    no catálogo ou que se encontram fora de stock.
+    Diz-nos o que desejas e vamos verificar a disponibilidade.
+  </p>
+
+  <form id="customOrderForm">
+    <label for="customerName">O teu nome *</label>
+    <input id="customerName" required
+      placeholder="Como te chamas?">
+
+    <label for="customerPhone">O teu contacto</label>
+    <input id="customerPhone" type="tel"
+      placeholder="O teu número de telefone">
+
+    <label for="orderType">Tipo de encomenda *</label>
+    <select id="orderType" required>
+      <option value="">Escolhe uma opção</option>
+      <option value="Produto fora de stock">
+        Produto fora de stock
+      </option>
+      <option value="Produto personalizado">
+        Produto diferente do catálogo
+      </option>
+      <option value="Encomenda de um produto do catálogo">
+        Produto que encontrei na loja
+      </option>
+    </select>
+
+    <label for="productName">Qual é o produto? *</label>
+    <input id="productName" required
+      placeholder="Ex.: fita LED RGB de 10 metros">
+
+    <label for="productDetails">
+      Marca, modelo, cor, tamanho e outros detalhes *
+    </label>
+    <textarea id="productDetails" required rows="4"
+      placeholder="Descreve o produto que desejas..."></textarea>
+
+    <label for="productLink">
+      Link ou referência do produto (opcional)
+    </label>
+    <input id="productLink" type="url"
+      placeholder="Cola aqui o link, se tiveres">
+
+    <label for="deliveryLocation">Local de entrega *</label>
+    <input id="deliveryLocation" required
+      placeholder="Ex.: Luanda, Talatona">
+
+    <p class="note">
+      O preço, a disponibilidade e o prazo de entrega
+      serão confirmados pela COMPREJÁ antes da compra.
+      A entrega poderá ter um custo adicional.
+    </p>
+
+    <button type="submit">
+      Enviar pedido pelo WhatsApp
+    </button>
+  </form>
+</section>
+
+<script>
+  document.getElementById("customOrderForm")
+    .addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const nome =
+        document.getElementById("customerName").value.trim();
+      const telefone =
+        document.getElementById("customerPhone").value.trim();
+      const tipo =
+        document.getElementById("orderType").value;
+      const produto =
+        document.getElementById("productName").value.trim();
+      const detalhes =
+        document.getElementById("productDetails").value.trim();
+      const link =
+        document.getElementById("productLink").value.trim();
+      const local =
+        document.getElementById("deliveryLocation").value.trim();
+
+      const mensagem =
+`🛍️ *NOVA ENCOMENDA — COMPREJÁ*
+
+👤 Nome: ${nome}
+📞 Contacto: ${telefone || "Não indicado"}
+📦 Tipo: ${tipo}
+🛒 Produto: ${produto}
+📝 Detalhes: ${detalhes}
+🔗 Referência: ${link || "Não fornecida"}
+📍 Local de entrega: ${local}
+
+Solicito a confirmação do preço, disponibilidade e prazo de entrega.`;
+
+      const numero = "244945529130";
+      const url =
+        "https://wa.me/" + numero +
+        "?text=" + encodeURIComponent(mensagem);
+
+      window.open(url, "_blank");
+    });
+</script>
+
 </body>
 </html>
 
