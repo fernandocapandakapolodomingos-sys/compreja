@@ -100,5 +100,154 @@ function escapeHtml(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;',
 // Carrega o catálogo online; se ainda estiver vazio, mantém a prévia de demonstração.
 if(supabaseClient){loadOnlineProducts().then(ok=>{if(ok){if(products.length===0){products=[];renderProducts();renderCart();}renderAdminProducts();}}).catch(err=>console.error(err));}
 
+/* ===== COMPREJÁ: PEDIDO DE PRODUTOS NÃO LISTADOS ===== */
+(function () {
+  const style = document.createElement('style');
+  style.textContent = `
+    .request-product {
+      margin: 24px 0;
+      padding: 24px;
+      border-radius: 14px;
+      background: linear-gradient(115deg, #061321, #0b3e70);
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .request-product h2 { margin: 0 0 8px; font-size: 22px; }
+    .request-product p { margin: 0; color: #d4e8fa; font-size: 13px; line-height: 1.6; }
+    .request-product .btn { background: #13b5ff; color: #031b31; }
+    .request-fields label { display: block; font-size: 12px; font-weight: 700; }
+    .request-fields input, .request-fields textarea {
+      display: block; width: 100%; margin: 6px 0 14px;
+      padding: 12px; border: 1px solid #dce5ef;
+      border-radius: 8px; font: inherit; box-sizing: border-box;
+    }
+    .request-fields textarea { min-height: 85px; resize: vertical; }
+    .request-note { font-size: 11px !important; }
+    @media(max-width:600px) {
+      .request-product { padding: 18px; }
+      .request-product .btn { width: 100%; }
+    }
+  `;
+  document.head.appendChild(style);
+
+  const section = document.createElement('section');
+  section.className = 'request-product';
+  section.innerHTML = `
+    <div>
+      <h2>Não encontraste o que procuras? Pede aqui</h2>
+      <p>Não encontras o produto na nossa loja? Envia-nos o teu pedido.
+      Vamos verificar se conseguimos encontrá-lo para ti.</p>
+    </div>
+    <button class="btn" type="button" id="openProductRequest">
+      Não encontraste o que procuras? Pede aqui
+    </button>
+  `;
+
+  const categoriesSection = document.getElementById('categorias');
+  if (categoriesSection) {
+    categoriesSection.parentNode.insertBefore(section, categoriesSection);
+  }
+
+  const modal = document.createElement('div');
+  modal.className = 'modal';
+  modal.id = 'requestProductModal';
+  modal.innerHTML = `
+    <div class="modal-card" role="dialog" aria-modal="true"
+         aria-labelledby="requestProductTitle">
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:10px">
+        <h2 id="requestProductTitle">🔎 Pedir um produto</h2>
+        <button class="close" type="button" id="closeProductRequest"
+                aria-label="Fechar">×</button>
+      </div>
+      <p>Conta-nos o que procuras para podermos verificar a disponibilidade.</p>
+      <form id="requestProductForm" class="request-fields">
+        <label for="requestName">Nome do produto *</label>
+        <input id="requestName" name="product" required maxlength="120"
+               placeholder="Ex.: iPhone 16 Pro">
+
+        <label for="requestBrand">Marca ou modelo</label>
+        <input id="requestBrand" name="brand" maxlength="100"
+               placeholder="Ex.: Apple, Samsung, Lenovo">
+
+        <label for="requestBudget">Orçamento máximo (Kz, opcional)</label>
+        <input id="requestBudget" name="budget" type="number"
+               min="0" step="1" placeholder="Ex.: 300000">
+
+        <label for="requestDetails">Outros detalhes (opcional)</label>
+        <textarea id="requestDetails" name="details" maxlength="500"
+                  placeholder="Ex.: cor, tamanho ou características"></textarea>
+
+        <button class="btn" type="submit" style="width:100%">
+          Enviar pedido pelo WhatsApp →
+        </button>
+      </form>
+      <p class="request-note">
+        O pedido não garante disponibilidade nem reserva.
+        O preço, o stock, a entrega e o pagamento serão confirmados pela COMPREJÁ.
+      </p>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  const openButton = document.getElementById('openProductRequest');
+  const closeButton = document.getElementById('closeProductRequest');
+
+  function openRequest() {
+    modal.classList.add('open');
+    document.getElementById('requestName').focus();
+  }
+
+  function closeRequest() {
+    modal.classList.remove('open');
+  }
+
+  openButton.addEventListener('click', openRequest);
+  closeButton.addEventListener('click', closeRequest);
+
+  modal.addEventListener('click', function (event) {
+    if (event.target === modal) closeRequest();
+  });
+
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape') closeRequest();
+  });
+
+  document.getElementById('requestProductForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const product = document.getElementById('requestName').value.trim();
+    const brand = document.getElementById('requestBrand').value.trim();
+    const budget = document.getElementById('requestBudget').value.trim();
+    const details = document.getElementById('requestDetails').value.trim();
+
+    if (!product) {
+      showToast('Indica o nome do produto que procuras.');
+      return;
+    }
+
+    const message = [
+      'Olá, COMPREJÁ! Gostaria de solicitar um produto que não encontrei na loja.',
+      '',
+      'Produto: ' + product,
+      'Marca/modelo: ' + (brand || 'Não especificado'),
+      'Orçamento máximo: ' + (
+        budget ? 'Kz ' + Number(budget).toLocaleString('pt-PT') : 'Não especificado'
+      ),
+      'Detalhes: ' + (details || 'Não especificados'),
+      '',
+      'Podem verificar a disponibilidade e informar o preço, por favor?'
+    ].join('\n');
+
+    const whatsappURL =
+      'https://wa.me/244945529130?text=' + encodeURIComponent(message);
+
+    window.open(whatsappURL, '_blank');
+    closeRequest();
+  });
+})();
 </script>
 </body></html>
