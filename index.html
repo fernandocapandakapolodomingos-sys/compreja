@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="COMPREJÁ — A tua loja online de diversos produtos em Angola.">
   <title>COMPREJÁ | A tua loja online</title>
+
   <style>
     :root {
       --blue: #155eef;
@@ -14,104 +15,140 @@
       --bg: #f5f7fb;
       --white: #fff;
       --green: #159947;
+      --red: #b42318;
     }
+
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font-family: Arial, Helvetica, sans-serif;
       color: var(--dark);
       background: var(--bg);
     }
-    button, input, select { font: inherit; }
+
+    button, input, select, textarea { font: inherit; }
     button { cursor: pointer; }
+
     header {
-      background: var(--white);
+      background: white;
       border-bottom: 1px solid #e4e7ec;
       position: sticky;
       top: 0;
       z-index: 10;
     }
+
     .topbar {
       max-width: 1150px;
       margin: auto;
-      padding: 17px 20px;
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 15px;
     }
+
     .logo {
       font-size: 27px;
       font-weight: 900;
       letter-spacing: -1px;
       color: var(--blue);
+      text-decoration: none;
     }
+
     .logo span { color: var(--dark); }
+
     .cart-button, .primary, .secondary {
       border: 0;
       border-radius: 10px;
       padding: 12px 16px;
       font-weight: 700;
     }
+
     .cart-button, .primary {
       background: var(--blue);
       color: white;
     }
+
     .secondary {
       background: #eaf0ff;
       color: var(--blue);
     }
+
+    button:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+    }
+
     .hero {
       padding: 58px 20px;
       color: white;
       background: linear-gradient(120deg, #102a72, #155eef 65%, #4787ff);
     }
+
     .hero-inner {
       max-width: 1150px;
       margin: auto;
     }
+
     .hero-tag {
       font-size: 13px;
       font-weight: bold;
       letter-spacing: 1.5px;
       color: #c8d8ff;
     }
+
     .hero h1 {
       font-size: clamp(34px, 6vw, 58px);
       max-width: 700px;
       line-height: 1.08;
       margin: 14px 0;
     }
+
     .hero p {
       font-size: 17px;
       line-height: 1.6;
       max-width: 600px;
       color: #e1eaff;
     }
+
     .hero .primary {
       background: white;
       color: var(--blue);
       margin-top: 10px;
     }
+
     main {
       max-width: 1150px;
       margin: auto;
       padding: 34px 20px 60px;
     }
+
     .benefits {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 14px;
       margin-bottom: 38px;
     }
+
     .benefit {
       padding: 18px;
       border: 1px solid #eaecf0;
       border-radius: 14px;
       background: white;
     }
-    .benefit strong { display: block; margin-bottom: 6px; }
-    .benefit p { color: var(--muted); font-size: 14px; margin: 0; }
+
+    .benefit strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .benefit p {
+      color: var(--muted);
+      font-size: 14px;
+      margin: 0;
+    }
+
     .section-heading {
       display: flex;
       align-items: end;
@@ -119,8 +156,14 @@
       gap: 16px;
       margin-bottom: 20px;
     }
+
     h2 { margin: 0 0 8px; font-size: 27px; }
-    .section-heading p { color: var(--muted); margin: 0; }
+
+    .section-heading p {
+      color: var(--muted);
+      margin: 0;
+    }
+
     .search {
       width: 100%;
       max-width: 330px;
@@ -129,12 +172,14 @@
       border-radius: 10px;
       background: white;
     }
+
     .filters {
       display: flex;
       flex-wrap: wrap;
       gap: 9px;
       margin-bottom: 22px;
     }
+
     .filter {
       padding: 9px 14px;
       border: 1px solid #d0d5dd;
@@ -142,16 +187,19 @@
       background: white;
       color: #344054;
     }
+
     .filter.active {
       background: var(--blue);
       border-color: var(--blue);
       color: white;
     }
+
     .products {
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 18px;
     }
+
     .product {
       background: white;
       border: 1px solid #eaecf0;
@@ -161,10 +209,12 @@
       flex-direction: column;
       transition: transform .18s, box-shadow .18s;
     }
+
     .product:hover {
       transform: translateY(-3px);
       box-shadow: 0 8px 25px #10182812;
     }
+
     .product-art {
       min-height: 145px;
       background: #edf2ff;
@@ -172,12 +222,14 @@
       place-items: center;
       font-size: 65px;
     }
+
     .product-info {
       padding: 15px;
       display: flex;
       flex-direction: column;
       flex: 1;
     }
+
     .category {
       font-size: 11px;
       font-weight: bold;
@@ -185,24 +237,89 @@
       letter-spacing: .7px;
       color: var(--blue);
     }
+
     .product h3 { margin: 8px 0; font-size: 17px; }
+
     .product-desc {
       color: var(--muted);
       font-size: 13px;
       line-height: 1.5;
       flex: 1;
     }
-    .price { font-size: 20px; font-weight: 800; margin: 14px 0; }
+
+    .price {
+      font-size: 20px;
+      font-weight: 800;
+      margin: 14px 0;
+    }
+
+    .stock-status {
+      font-size: 12px;
+      font-weight: bold;
+      margin: 0 0 12px;
+      line-height: 1.5;
+    }
+
+    .in-stock { color: var(--green); }
+    .out-stock { color: var(--red); }
+
     .product .primary { width: 100%; }
-    .empty { grid-column: 1 / -1; padding: 35px; text-align: center; color: var(--muted); }
-    .notice {
+
+    .empty {
+      grid-column: 1 / -1;
+      padding: 35px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .notice, .custom-order {
       margin-top: 30px;
-      padding: 20px;
+      padding: 24px;
       border-radius: 14px;
       background: #eaf0ff;
       color: #243b70;
       line-height: 1.6;
     }
+
+    .custom-order {
+      background: white;
+      color: var(--dark);
+      border: 1px solid #eaecf0;
+    }
+
+    .custom-order h2 { color: var(--blue); }
+
+    .custom-order label {
+      display: block;
+      margin-top: 14px;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .custom-order input,
+    .custom-order select,
+    .custom-order textarea {
+      width: 100%;
+      margin-top: 7px;
+      padding: 12px;
+      border: 1px solid #d0d5dd;
+      border-radius: 9px;
+      background: white;
+    }
+
+    .custom-order textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .custom-order .primary { width: 100%; margin-top: 20px; }
+
+    .small-note {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
     footer {
       background: #101828;
       color: #d0d5dd;
@@ -210,7 +327,9 @@
       text-align: center;
       line-height: 1.8;
     }
+
     footer strong { color: white; }
+
     .modal-backdrop {
       position: fixed;
       inset: 0;
@@ -221,7 +340,9 @@
       align-items: center;
       padding: 16px;
     }
+
     .modal-backdrop.open { display: flex; }
+
     .modal {
       background: white;
       border-radius: 16px;
@@ -231,18 +352,21 @@
       max-height: 90vh;
       overflow-y: auto;
     }
+
     .modal-title {
       display: flex;
       justify-content: space-between;
       align-items: center;
       gap: 12px;
     }
+
     .close {
       border: 0;
       background: #f2f4f7;
       border-radius: 8px;
       padding: 8px 12px;
     }
+
     .cart-line {
       display: flex;
       justify-content: space-between;
@@ -250,15 +374,34 @@
       padding: 13px 0;
       border-bottom: 1px solid #eaecf0;
     }
-    .cart-line small { display: block; color: var(--muted); margin-top: 5px; }
-    .quantity { display: flex; align-items: center; gap: 9px; margin-top: 7px; }
+
+    .cart-line small {
+      display: block;
+      color: var(--muted);
+      margin-top: 5px;
+    }
+
+    .quantity {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      margin-top: 7px;
+    }
+
     .quantity button {
       border: 1px solid #d0d5dd;
       background: white;
       border-radius: 6px;
       padding: 4px 9px;
     }
-    .remove { color: #b42318; border: 0; background: none; margin-top: 5px; }
+
+    .remove {
+      color: var(--red);
+      border: 0;
+      background: none;
+      margin-top: 5px;
+    }
+
     .total {
       display: flex;
       justify-content: space-between;
@@ -266,8 +409,16 @@
       font-weight: 800;
       padding: 18px 0;
     }
+
     .field { margin: 14px 0; }
-    .field label { display: block; font-size: 14px; font-weight: bold; margin-bottom: 7px; }
+
+    .field label {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 7px;
+    }
+
     .field input, .field select {
       width: 100%;
       padding: 12px;
@@ -275,14 +426,16 @@
       border-radius: 9px;
       background: white;
     }
+
     .full { width: 100%; margin-top: 10px; }
-    .small-note { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
     @media (max-width: 850px) {
       .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .benefits { grid-template-columns: 1fr; }
       .section-heading { align-items: stretch; flex-direction: column; }
       .search { max-width: none; }
     }
+
     @media (max-width: 420px) {
       .products { gap: 10px; }
       .product-art { min-height: 110px; font-size: 48px; }
@@ -291,13 +444,15 @@
       .price { font-size: 17px; }
       .logo { font-size: 23px; }
       .cart-button { padding: 10px; }
+      .hero { padding: 40px 20px; }
     }
   </style>
 </head>
+
 <body>
   <header>
     <div class="topbar">
-      <a href="#" class="logo" style="text-decoration:none">COMPRE<span>JÁ</span></a>
+      <a href="#" class="logo">COMPRE<span>JÁ</span></a>
       <button class="cart-button" onclick="openCart()">
         🛒 Carrinho (<span id="cart-count">0</span>)
       </button>
@@ -308,7 +463,7 @@
     <div class="hero-inner">
       <div class="hero-tag">A TUA LOJA ONLINE</div>
       <h1>Encontra o que precisas. Compra já!</h1>
-      <p>Descobre diversos produtos num só lugar. Escolhe os teus favoritos e faz o teu pedido de forma simples e rápida.</p>
+      <p>Descobre diversos produtos num só lugar. Compra os teus favoritos ou encomenda um produto ao teu gosto.</p>
       <button class="primary" onclick="document.getElementById('loja').scrollIntoView({behavior:'smooth'})">
         Explorar produtos ↓
       </button>
@@ -322,21 +477,23 @@
         <p>Diferentes produtos numa única loja.</p>
       </div>
       <div class="benefit">
-        <strong>💬 Pedido fácil</strong>
-        <p>Envia a tua encomenda diretamente pelo WhatsApp.</p>
+        <strong>📦 Encomendas personalizadas</strong>
+        <p>Pede também os produtos que não estão no catálogo.</p>
       </div>
       <div class="benefit">
         <strong>💳 Pagamento combinado</strong>
-        <p>Transferência ou Multicaixa Express, conforme confirmação do vendedor.</p>
+        <p>Transferência ou Multicaixa Express, após confirmação do vendedor.</p>
       </div>
     </div>
 
     <div class="section-heading">
       <div>
         <h2>Os nossos produtos</h2>
-        <p>Escolhe os teus favoritos e adiciona-os ao carrinho.</p>
+        <p>Pesquisa, escolhe uma categoria e consulta o stock.</p>
       </div>
-      <input id="search" class="search" type="search" placeholder="🔎 Procurar produto..." oninput="renderProducts()">
+      <input id="search" class="search" type="search"
+        placeholder="🔎 Procurar produto..."
+        oninput="renderProducts()">
     </div>
 
     <div class="filters" id="filters"></div>
@@ -344,8 +501,64 @@
 
     <div class="notice">
       <strong>📦 Como comprar?</strong><br>
-      Escolhe os produtos, adiciona-os ao carrinho e envia o pedido pelo WhatsApp. O vendedor confirmará a disponibilidade, a entrega e os dados de pagamento antes de concluíres a compra.
+      Adiciona ao carrinho os produtos disponíveis. Se um produto estiver fora de stock, podes encomendá-lo pelo WhatsApp. O vendedor confirmará o preço final, a disponibilidade e a entrega.
     </div>
+
+    <section class="custom-order" id="encomenda-personalizada">
+      <h2>Não encontraste o que procuras?</h2>
+      <p>
+        Encomenda um produto diferente ou descreve exatamente
+        aquilo que desejas. Vamos verificar se conseguimos encontrá-lo.
+      </p>
+
+      <form id="customOrderForm">
+        <label for="customerName">O teu nome *</label>
+        <input id="customerName" required maxlength="100"
+          placeholder="Como te chamas?">
+
+        <label for="customerPhone">O teu contacto</label>
+        <input id="customerPhone" type="tel" maxlength="30"
+          placeholder="O teu número de telefone">
+
+        <label for="orderType">Tipo de encomenda *</label>
+        <select id="orderType" required>
+          <option value="">Escolhe uma opção</option>
+          <option value="Produto fora de stock">Produto fora de stock</option>
+          <option value="Produto personalizado">Produto diferente do catálogo</option>
+          <option value="Produto do catálogo">Produto do catálogo</option>
+        </select>
+
+        <label for="productName">Nome do produto *</label>
+        <input id="productName" required maxlength="150"
+          placeholder="Ex.: fita LED RGB de 10 metros">
+
+        <label for="productDetails">Marca, modelo, cor, tamanho e detalhes *</label>
+        <textarea id="productDetails" required maxlength="1500"
+          placeholder="Descreve o produto que desejas..."></textarea>
+
+        <label for="productLink">Link de referência (opcional)</label>
+        <input id="productLink" type="url" maxlength="500"
+          placeholder="https://...">
+
+        <label for="productQuantity">Quantidade pretendida *</label>
+        <input id="productQuantity" type="number" min="1" max="1000"
+          value="1" required>
+
+        <label for="deliveryLocation">Local de entrega *</label>
+        <input id="deliveryLocation" required maxlength="200"
+          placeholder="Município, bairro ou zona">
+
+        <p class="small-note">
+          O preço, a disponibilidade, o prazo e o custo da entrega
+          serão confirmados antes da compra. O envio deste pedido
+          não representa uma confirmação de venda.
+        </p>
+
+        <button class="primary" type="submit">
+          Enviar encomenda personalizada pelo WhatsApp
+        </button>
+      </form>
+    </section>
   </main>
 
   <footer>
@@ -355,25 +568,30 @@
   </footer>
 
   <div class="modal-backdrop" id="cart-modal" onclick="backdropClose(event)">
-    <div class="modal">
+    <div class="modal" role="dialog" aria-modal="true" aria-label="Carrinho de compras">
       <div class="modal-title">
         <h2>O teu carrinho</h2>
-        <button class="close" onclick="closeCart()">✕</button>
+        <button class="close" onclick="closeCart()" aria-label="Fechar">✕</button>
       </div>
+
       <div id="cart-items"></div>
       <div class="total"><span>Total</span><span id="cart-total">0 Kz</span></div>
+
       <div class="field">
-        <label for="customer-name">O teu nome</label>
-        <input id="customer-name" placeholder="Nome completo">
+        <label for="customer-name">O teu nome *</label>
+        <input id="customer-name" maxlength="100" placeholder="Nome completo">
       </div>
+
       <div class="field">
-        <label for="customer-phone">Telefone</label>
-        <input id="customer-phone" type="tel" placeholder="Ex.: 923 000 000">
+        <label for="customer-phone">Telefone *</label>
+        <input id="customer-phone" type="tel" maxlength="30" placeholder="O teu número">
       </div>
+
       <div class="field">
-        <label for="customer-address">Zona de entrega</label>
-        <input id="customer-address" placeholder="Município, bairro ou zona">
+        <label for="customer-address">Zona de entrega *</label>
+        <input id="customer-address" maxlength="200" placeholder="Município, bairro ou zona">
       </div>
+
       <div class="field">
         <label for="payment">Método de pagamento preferido</label>
         <select id="payment">
@@ -382,88 +600,74 @@
           <option>Combinar com o vendedor</option>
         </select>
       </div>
-      <button class="primary full" onclick="checkout()">Enviar pedido pelo WhatsApp</button>
-      <p class="small-note">O pedido só será confirmado pelo vendedor. Não envies códigos PIN, senhas ou códigos de segurança.</p>
+
+      <button class="primary full" onclick="checkout()">
+        Enviar pedido pelo WhatsApp
+      </button>
+
+      <p class="small-note">
+        O pedido só será confirmado pelo vendedor. Nunca envies
+        códigos PIN, senhas ou códigos de segurança.
+      </p>
     </div>
   </div>
 
   <script>
-    // DADOS DE DEMONSTRAÇÃO: substitui pelos produtos e preços reais.
-    // IMPORTANTE: configura abaixo o WhatsApp comercial correto.
-const WHATSAPP = "244945529130";
+    // CONFIGURAÇÃO DA LOJA
+    const WHATSAPP = "244945529130";
 
-
+    // ATENÇÃO: os preços e stocks abaixo são exemplos.
+    // Atualiza-os conforme os preços e quantidades reais.
     const productsData = [
-      {id:1, name:"Auscultadores Bluetooth", category:"Tecnologia", price:12500, stock: 10, emoji:"🎧", desc:"Som sem fios para música e chamadas."},
-      {id:2, name: "Fita LED RGB", category: "Acessórios", price: 8000, stock: 20, emoji: "💡", desc: "Iluminação LED RGB"
-      {id:3, name:"Relógio inteligente", category:"Tecnologia", price:18000,stock: 11, emoji:"⌚", desc:"Um acessório moderno para o dia a dia."},
-      {id:4, name:"Mochila urbana", category:"Moda", price:9500,stock: 5, emoji:"🎒", desc:"Prática para escola, trabalho e passeios."},
-      {id:5, name:"Ténis desportivos", category:"Moda", price:22000,stock: 10, emoji:"👟", desc:"Estilo casual para várias ocasiões."},
-      {id:6, name:"Candeeiro LED", category:"Casa", price:7500, stock: 3,emoji:"💡", desc:"Iluminação para o teu espaço."},
-      {id:7, name:"Garrafa térmica", category:"Casa", price:6000,stock: 3, emoji:"🥤", desc:"Ideal para transportar a tua bebida."},
-      {id:8, name:"Comando para jogos", category:"Tecnologia",stock: 6, price:16000, emoji:"🎮", desc:"Para melhorar a tua experiência de jogo."},
-      {id:9, name:"Perfume", category:"Beleza", price:14000,stock: 15, emoji:"🧴", desc:"Uma opção elegante para oferecer."}
+      {id:1, name:"Auscultadores Bluetooth", category:"Tecnologia", price:12500, stock:10, emoji:"🎧", desc:"Som sem fios para música e chamadas."},
+      {id:2, name:"Fita LED RGB", category:"Acessórios", price:8000, stock:0, emoji:"💡", desc:"Iluminação LED RGB. Preço sujeito a confirmação."},
+      {id:3, name:"Relógio inteligente", category:"Tecnologia", price:18000, stock:11, emoji:"⌚", desc:"Um acessório moderno para o dia a dia."},
+      {id:4, name:"Mochila urbana", category:"Moda", price:9500, stock:5, emoji:"🎒", desc:"Prática para escola, trabalho e passeios."},
+      {id:5, name:"Ténis desportivos", category:"Moda", price:22000, stock:10, emoji:"👟", desc:"Estilo casual para várias ocasiões."},
+      {id:6, name:"Candeeiro LED", category:"Casa", price:7500, stock:3, emoji:"💡", desc:"Iluminação para o teu espaço."},
+      {id:7, name:"Garrafa térmica", category:"Casa", price:6000, stock:3, emoji:"🥤", desc:"Ideal para transportar a tua bebida."},
+      {id:8, name:"Comando para jogos", category:"Tecnologia", price:16000, stock:6, emoji:"🎮", desc:"Para melhorar a tua experiência de jogo."},
+      {id:9, name:"Perfume", category:"Beleza", price:14000, stock:15, emoji:"🧴", desc:"Uma opção elegante para oferecer."},
+      {id:10, name:"Coluna Bluetooth", category:"Tecnologia", price:null, stock:0, emoji:"🔊", desc:"Coluna portátil. Preço sob consulta."},
+      {id:11, name:"Power bank", category:"Tecnologia", price:null, stock:0, emoji:"🔋", desc:"Bateria portátil. Preço sob consulta."},
+      {id:12, name:"Carregador e cabo USB", category:"Acessórios", price:null, stock:0, emoji:"🔌", desc:"Acessórios de carregamento. Preço sob consulta."},
+      {id:13, name:"Rato para computador", category:"Tecnologia", price:null, stock:0, emoji:"🖱️", desc:"Rato para computador. Preço sob consulta."},
+      {id:14, name:"Mini ventoinha portátil", category:"Casa", price:null, stock:0, emoji:"🌀", desc:"Ventoinha portátil. Preço sob consulta."}
     ];
 
     let cart = [];
     let activeCategory = "Todos";
 
-    const money = value => new Intl.NumberFormat("pt-AO").format(value) + " Kz";
+    const money = value =>
+      new Intl.NumberFormat("pt-AO", {
+        maximumFractionDigits: 0
+      }).format(value) + " Kz";
 
     function renderFilters() {
-      const categories = ["Todos", ...new Set(productsData.map(p => p.category))];
-      document.getElementById("filters").innerHTML = categories.map(category =>
-        `<button class="filter ${category === activeCategory ? "active" : ""}"
-        onclick="setCategory('${category}')">${category}</button>`
-      ).join("");
+      const categories = [
+        "Todos",
+        ...new Set(productsData.map(p => p.category))
+      ];
+
+      document.getElementById("filters").innerHTML =
+        categories.map(category => `
+          <button class="filter ${category === activeCategory ? "active" : ""}"
+            onclick="setCategory(${JSON.stringify(category)})">
+            ${category}
+          </button>
+        `).join("");
     }
 
     function setCategory(category) {
       activeCategory = category;
       renderFilters();
-      
-function orderProductWhatsApp(productId) {
-  const product = productsData.find(
-    p => String(p.id) === String(productId)
-  );
-
-  if (!product) {
-    alert("Não foi possível encontrar este produto.");
-    return;
-  }
-
-  const stockStatus = Number(product.stock) > 0
-    ? "Produto disponível em stock"
-    : "Produto fora de stock — pretendo encomendar";
-
-  const message =
-`Olá, COMPREJÁ! 👋
-
-Quero fazer uma encomenda.
-
-📦 Produto: ${product.name}
-💰 Preço anunciado: ${
-  Number.isFinite(Number(product.price)) && product.price !== null
-    ? Number(product.price).toLocaleString("pt-PT") + " Kz"
-    : "Sob consulta"
-}
-📍 Estado: ${stockStatus}
-
-Por favor, confirmem a disponibilidade, o preço final e o prazo de entrega.`;
-
-  const phone = "244945529130";
-
-  const url =
-    "https://wa.me/" + phone +
-    "?text=" + encodeURIComponent(message);
-
-  window.open(url, "_blank");
-}
       renderProducts();
     }
 
     function renderProducts() {
-      const query = document.getElementById("search").value.trim().toLowerCase();
+      const query = document.getElementById("search")
+        .value.trim().toLowerCase();
+
       const filtered = productsData.filter(p =>
         (activeCategory === "Todos" || p.category === activeCategory) &&
         (p.name.toLowerCase().includes(query) ||
@@ -472,37 +676,132 @@ Por favor, confirmem a disponibilidade, o preço final e o prazo de entrega.`;
       );
 
       const container = document.getElementById("products");
+
       if (!filtered.length) {
-        container.innerHTML = '<div class="empty">Não encontrámos produtos. Experimenta outra pesquisa.</div>';
+        container.innerHTML =
+          '<div class="empty">Não encontrámos produtos. Experimenta outra pesquisa.</div>';
         return;
       }
 
-      container.innerHTML = filtered.map(p => `
-        <article class="product">
-          <div class="product-art" aria-hidden="true">${p.emoji}</div>
-          <div class="product-info">
-            <div class="category">${p.category}</div>
-            <h3>${p.name}</h3>
-            <div class="product-desc">${p.desc}</div>
-            <div class="price">${money(p.price)}</div>
-            <button class="primary" onclick="addToCart(${p.id})">Adicionar ao carrinho</button>
-          </div>
-        </article>
-      `).join("");
+      container.innerHTML = filtered.map(p => {
+        const available = p.stock > 0;
+        const priceText = p.price == null
+          ? "Preço sob consulta"
+          : money(p.price) +
+            (p.id === 2 ? " · sujeito a confirmação" : "");
+
+        const buttonText = available
+          ? "Adicionar ao carrinho"
+          : "Encomendar pelo WhatsApp";
+
+        return `
+          <article class="product">
+            <div class="product-art" aria-hidden="true">${p.emoji}</div>
+            <div class="product-info">
+              <div class="category">${p.category}</div>
+              <h3>${p.name}</h3>
+              <div class="product-desc">${p.desc}</div>
+              <div class="price">${priceText}</div>
+              <p class="stock-status ${available ? "in-stock" : "out-stock"}">
+                ${available
+                  ? "✓ Em stock: " + p.stock + " unidade(s)"
+                  : "● Fora de stock — aceita encomendas"}
+              </p>
+              <button class="primary"
+                onclick="${available
+                  ? "addToCart(" + p.id + ")"
+                  : "orderProductWhatsApp(" + p.id + ")"}">
+                ${buttonText}
+              </button>
+            </div>
+          </article>
+        `;
+      }).join("");
+    }
+
+    function orderProductWhatsApp(productId) {
+      const product = productsData.find(
+        p => String(p.id) === String(productId)
+      );
+
+      if (!product) {
+        alert("Não foi possível encontrar este produto.");
+        return;
+      }
+
+      const priceText = product.price == null
+        ? "Preço sob consulta"
+        : money(product.price) + " — sujeito a confirmação";
+
+      const message =
+`Olá, COMPREJÁ! Quero encomendar este produto.
+
+Produto: ${product.name}
+Preço anunciado: ${priceText}
+Estado: ${product.stock > 0 ? "Disponível em stock" : "Fora de stock / sob encomenda"}
+
+Por favor, confirmem a disponibilidade, o preço final e o prazo de entrega.`;
+
+      openWhatsApp(message);
+    }
+
+    function openWhatsApp(message) {
+      const url = "https://wa.me/" + WHATSAPP +
+        "?text=" + encodeURIComponent(message);
+
+      window.open(url, "_blank", "noopener,noreferrer");
     }
 
     function addToCart(id) {
+      const product = productsData.find(p => p.id === id);
+
+      if (!product) return;
+
+      if (product.price == null) {
+        orderProductWhatsApp(id);
+        return;
+      }
+
+      if (product.stock <= 0) {
+        orderProductWhatsApp(id);
+        return;
+      }
+
       const existing = cart.find(item => item.id === id);
-      if (existing) existing.qty++;
-      else cart.push({...productsData.find(p => p.id === id), qty:1});
+
+      if (existing) {
+        if (existing.qty >= product.stock) {
+          alert("Só temos " + product.stock + " unidade(s) disponíveis.");
+          return;
+        }
+
+        existing.qty++;
+      } else {
+        cart.push({...product, qty:1});
+      }
+
       updateCart();
     }
 
     function changeQty(id, delta) {
       const item = cart.find(p => p.id === id);
-      if (!item) return;
-      item.qty += delta;
-      if (item.qty <= 0) cart = cart.filter(p => p.id !== id);
+      const product = productsData.find(p => p.id === id);
+
+      if (!item || !product) return;
+
+      const newQty = item.qty + delta;
+
+      if (newQty > product.stock) {
+        alert("Só temos " + product.stock + " unidade(s) disponíveis.");
+        return;
+      }
+
+      if (newQty <= 0) {
+        cart = cart.filter(p => p.id !== id);
+      } else {
+        item.qty = newQty;
+      }
+
       updateCart();
     }
 
@@ -513,30 +812,36 @@ Por favor, confirmem a disponibilidade, o preço final e o prazo de entrega.`;
 
     function updateCart() {
       const count = cart.reduce((sum, item) => sum + item.qty, 0);
-      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+      const total = cart.reduce(
+        (sum, item) => sum + item.price * item.qty, 0
+      );
+
       document.getElementById("cart-count").textContent = count;
       document.getElementById("cart-total").textContent = money(total);
 
       const container = document.getElementById("cart-items");
+
       if (!cart.length) {
-        container.innerHTML = '<p class="empty">O teu carrinho ainda está vazio.</p>';
-      } else {
-        container.innerHTML = cart.map(item => `
-          <div class="cart-line">
-            <div>
-              <strong>${item.emoji} ${item.name}</strong>
-              <small>${money(item.price)} por unidade</small>
-              <div class="quantity">
-                <button onclick="changeQty(${item.id},-1)" aria-label="Diminuir">−</button>
-                <span>${item.qty}</span>
-                <button onclick="changeQty(${item.id},1)" aria-label="Aumentar">+</button>
-              </div>
-              <button class="remove" onclick="removeItem(${item.id})">Remover</button>
-            </div>
-            <strong>${money(item.price * item.qty)}</strong>
-          </div>
-        `).join("");
+        container.innerHTML =
+          '<p class="empty">O teu carrinho ainda está vazio.</p>';
+        return;
       }
+
+      container.innerHTML = cart.map(item => `
+        <div class="cart-line">
+          <div>
+            <strong>${item.emoji} ${item.name}</strong>
+            <small>${money(item.price)} por unidade</small>
+            <div class="quantity">
+              <button onclick="changeQty(${item.id},-1)" aria-label="Diminuir">−</button>
+              <span>${item.qty}</span>
+              <button onclick="changeQty(${item.id},1)" aria-label="Aumentar">+</button>
+            </div>
+            <button class="remove" onclick="removeItem(${item.id})">Remover</button>
+          </div>
+          <strong>${money(item.price * item.qty)}</strong>
+        </div>
+      `).join("");
     }
 
     function openCart() {
@@ -568,205 +873,67 @@ Por favor, confirmem a disponibilidade, o preço final e o prazo de entrega.`;
         return;
       }
 
-      if (!/^\d{10,15}$/.test(WHATSAPP)) {
-        alert("O número de WhatsApp comercial precisa de ser configurado no código.");
-        return;
-      }
-
       const lines = cart.map(item =>
         `- ${item.name} x${item.qty}: ${money(item.price * item.qty)}`
       ).join("\n");
 
-      const total = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
-      const message =
-        `Olá, COMPREJÁ! Quero fazer este pedido:\n\n${lines}\n\n` +
-        `Total estimado: ${money(total)}\n\n` +
-        `Nome: ${name}\nTelefone: ${phone}\nZona de entrega: ${address}\n` +
-        `Pagamento preferido: ${payment}\n\n` +
-        `Por favor, confirmem disponibilidade, entrega e dados de pagamento.`;
-
-      window.open(
-        "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(message),
-        "_blank",
-        "noopener,noreferrer"
+      const total = cart.reduce(
+        (sum, item) => sum + item.price * item.qty, 0
       );
+
+      const message =
+`Olá, COMPREJÁ! Quero fazer este pedido:
+
+${lines}
+
+Total estimado: ${money(total)}
+
+Nome: ${name}
+Telefone: ${phone}
+Zona de entrega: ${address}
+Pagamento preferido: ${payment}
+
+Por favor, confirmem o stock, o custo de entrega e os dados de pagamento antes da conclusão da compra.`;
+
+      openWhatsApp(message);
     }
 
-    document.getElementById("year").textContent = new Date().getFullYear();
+    document.getElementById("customOrderForm")
+      .addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const nome = document.getElementById("customerName").value.trim();
+        const telefone = document.getElementById("customerPhone").value.trim();
+        const tipo = document.getElementById("orderType").value;
+        const produto = document.getElementById("productName").value.trim();
+        const detalhes = document.getElementById("productDetails").value.trim();
+        const link = document.getElementById("productLink").value.trim();
+        const quantidade = document.getElementById("productQuantity").value;
+        const local = document.getElementById("deliveryLocation").value.trim();
+
+        const message =
+`🛍️ NOVA ENCOMENDA PERSONALIZADA — COMPREJÁ
+
+Nome: ${nome}
+Contacto: ${telefone || "Não indicado"}
+Tipo: ${tipo}
+Produto: ${produto}
+Detalhes: ${detalhes}
+Link de referência: ${link || "Não fornecido"}
+Quantidade: ${quantidade}
+Local de entrega: ${local}
+
+Solicito confirmação do preço, disponibilidade, prazo e custo de entrega.`;
+
+        openWhatsApp(message);
+      });
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
     renderFilters();
     renderProducts();
     updateCart();
   </script>
-  
-<!-- ENCOMENDAS PERSONALIZADAS COMPREJÁ -->
-<style>
-  .custom-order {
-    max-width: 760px;
-    margin: 35px auto;
-    padding: 24px;
-    border-radius: 18px;
-    background: #f1f6ff;
-    color: #17233b;
-    font-family: Arial, sans-serif;
-  }
-
-  .custom-order h2 {
-    margin-top: 0;
-    color: #1455c0;
-  }
-
-  .custom-order p {
-    line-height: 1.6;
-  }
-
-  .custom-order label {
-    display: block;
-    margin-top: 14px;
-    font-weight: bold;
-  }
-
-  .custom-order input,
-  .custom-order select,
-  .custom-order textarea {
-    box-sizing: border-box;
-    width: 100%;
-    margin-top: 7px;
-    padding: 12px;
-    border: 1px solid #cbd5e1;
-    border-radius: 9px;
-    background: white;
-    font: inherit;
-  }
-
-  .custom-order button {
-    width: 100%;
-    margin-top: 20px;
-    padding: 14px;
-    border: 0;
-    border-radius: 10px;
-    background: #1455c0;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-  }
-
-  .custom-order button:hover {
-    background: #0d3d91;
-  }
-
-  .custom-order .note {
-    font-size: 13px;
-    color: #526078;
-  }
-</style>
-
-<section class="custom-order" id="encomenda-personalizada">
-  <h2>Não encontraste o que procuras?</h2>
-
-  <p>
-    Na COMPREJÁ, podes encomendar produtos que não estão
-    no catálogo ou que se encontram fora de stock.
-    Diz-nos o que desejas e vamos verificar a disponibilidade.
-  </p>
-
-  <form id="customOrderForm">
-    <label for="customerName">O teu nome *</label>
-    <input id="customerName" required
-      placeholder="Como te chamas?">
-
-    <label for="customerPhone">O teu contacto</label>
-    <input id="customerPhone" type="tel"
-      placeholder="O teu número de telefone">
-
-    <label for="orderType">Tipo de encomenda *</label>
-    <select id="orderType" required>
-      <option value="">Escolhe uma opção</option>
-      <option value="Produto fora de stock">
-        Produto fora de stock
-      </option>
-      <option value="Produto personalizado">
-        Produto diferente do catálogo
-      </option>
-      <option value="Encomenda de um produto do catálogo">
-        Produto que encontrei na loja
-      </option>
-    </select>
-
-    <label for="productName">Qual é o produto? *</label>
-    <input id="productName" required
-      placeholder="Ex.: fita LED RGB de 10 metros">
-
-    <label for="productDetails">
-      Marca, modelo, cor, tamanho e outros detalhes *
-    </label>
-    <textarea id="productDetails" required rows="4"
-      placeholder="Descreve o produto que desejas..."></textarea>
-
-    <label for="productLink">
-      Link ou referência do produto (opcional)
-    </label>
-    <input id="productLink" type="url"
-      placeholder="Cola aqui o link, se tiveres">
-
-    <label for="deliveryLocation">Local de entrega *</label>
-    <input id="deliveryLocation" required
-      placeholder="Ex.: Luanda, Talatona">
-
-    <p class="note">
-      O preço, a disponibilidade e o prazo de entrega
-      serão confirmados pela COMPREJÁ antes da compra.
-      A entrega poderá ter um custo adicional.
-    </p>
-
-    <button type="submit">
-      Enviar pedido pelo WhatsApp
-    </button>
-  </form>
-</section>
-
-<script>
-  document.getElementById("customOrderForm")
-    .addEventListener("submit", function(event) {
-      event.preventDefault();
-
-      const nome =
-        document.getElementById("customerName").value.trim();
-      const telefone =
-        document.getElementById("customerPhone").value.trim();
-      const tipo =
-        document.getElementById("orderType").value;
-      const produto =
-        document.getElementById("productName").value.trim();
-      const detalhes =
-        document.getElementById("productDetails").value.trim();
-      const link =
-        document.getElementById("productLink").value.trim();
-      const local =
-        document.getElementById("deliveryLocation").value.trim();
-
-      const mensagem =
-`🛍️ *NOVA ENCOMENDA — COMPREJÁ*
-
-👤 Nome: ${nome}
-📞 Contacto: ${telefone || "Não indicado"}
-📦 Tipo: ${tipo}
-🛒 Produto: ${produto}
-📝 Detalhes: ${detalhes}
-🔗 Referência: ${link || "Não fornecida"}
-📍 Local de entrega: ${local}
-
-Solicito a confirmação do preço, disponibilidade e prazo de entrega.`;
-
-      const numero = "244945529130";
-      const url =
-        "https://wa.me/" + numero +
-        "?text=" + encodeURIComponent(mensagem);
-
-      window.open(url, "_blank");
-    });
-</script>
-
 </body>
 </html>
-
